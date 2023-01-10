@@ -1,0 +1,44 @@
+
+
+plugins:
+  - serverless-offline
+
+service: task2
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  environment:
+    DATA_BASE=test
+    username=root
+    password=test@1234
+    host=localhost
+    
+
+functions:
+  addUser:
+    handler: handler.addUser
+    events:
+      - httpApi:
+          path: /addUser
+          method: post
+  getUser:
+    handler: handler.getUser
+    events:
+      - httpApi:
+          path: /getUser/{key}
+          method: get
+
+  getAllUser:
+    handler: handler.getAllUser
+    events:
+      - httpApi:
+          path: /getAllUsers
+          method: get
+  deleteUser:
+    handler: handler.deleteUser
+    events:
+      - httpApi:
+          path: /deleteUser/{key}
+          method: delete
